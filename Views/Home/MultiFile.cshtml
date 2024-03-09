@@ -1,0 +1,62 @@
+﻿@model ResumeTextExtract.Models.MultipleFilesModel
+
+@{
+    ViewData["Title"] = "Multi File Upload";
+
+}
+<form asp-action="MultiUpload" asp-controller="Home" method="post" enctype="multipart/form-data">
+    @if (Model.IsResponse)
+    {
+        if (Model.IsSuccess)
+        {
+            <div class="alert alert-success">
+                @Model.Message
+            </div>
+            <div class="alert alert-success">
+                @Model.Data
+            </div>
+            <div class="alert alert-success">
+                @Model.DataMessage
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                @Model.Message
+            </div>
+        }
+    }
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <label class="col-form-label">Select Multiple Files</label>
+            <input asp-for="Files" class="form-control" multiple />
+            <span asp-validation-for="Files" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <label class="col-form-label">Select Skill</label>
+            @*@Html.DropDownList("SkillSet" ,new List<SelectListItem>
+            {
+                  new SelectListItem { Text = ".Net", Value = "1", Selected=true},
+                  new SelectListItem { Text = "Java", Value = "2"},
+                  new SelectListItem { Text = "SAP", Value = "3"}
+            }, "Select SkillSet")*@
+        <select asp-for="SkillSet" class="form-control">
+            <option id="1" value=".Net">.Net</option>
+            <option id="2" value="Java">Java</option>
+            <option id="3" value="SAP">SAP</option>
+        </select>
+            <span asp-validation-for="SkillSet" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Upload Files</button>
+        </div>
+    </div>
+</form>
